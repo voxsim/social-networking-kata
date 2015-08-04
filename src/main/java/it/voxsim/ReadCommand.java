@@ -1,10 +1,10 @@
 package it.voxsim;
 
-public class FollowCommand extends Command {
+public class ReadCommand extends Command {
 
 	@Override
 	public String execute(String username, String argument) {
-		return "";
+		return "no messages from " + username;
 	}
 
 }

@@ -14,8 +14,8 @@ public class SocialNetworkingClientTest {
 	}
 
 	@Test
-	public void emptyWall() throws Exception {
-		typeCommandAndAssertThatLastOutputIs("Alice", "no messages in your wall");
+	public void noMessagesToRead() throws Exception {
+		typeCommandAndAssertThatLastOutputIs("Alice", "no messages from Alice");
 	}
 
 	@Test
@@ -26,6 +26,11 @@ public class SocialNetworkingClientTest {
 	@Test
 	public void followsAnotherUser() throws Exception {
 		typeCommandAndAssertThatLastOutputIs("Alice follows Charlie", "");
+	}
+	
+	@Test
+	public void showUserWall() throws Exception {
+		typeCommandAndAssertThatLastOutputIs("Alice wall", "no messages in Alice wall");
 	}
 
 	@Test
@@ -39,7 +44,8 @@ public class SocialNetworkingClientTest {
 
 		typeCommandAndAssertThatLastOutputIs("Charlie -> I'm in New York today!", "");
 
-		typeCommandAndAssertThatLastOutputIs("Alice wall", "I'm in New York today! (15 seconds ago)\n" + "I love the weather today (5 minutes ago)");
+		typeCommandAndAssertThatLastOutputIs("Alice wall", "Charlie - I'm in New York today! (15 seconds ago)\n" + 
+														   "Alice - I love the weather today (5 minutes ago)");
 	}
 
 	private void typeCommandAndAssertThatLastOutputIs(String command, String expectedOutput) {

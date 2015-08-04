@@ -12,9 +12,9 @@ public class SocialNetworkingClient {
 
 		String username = matcher.group(1);
 		String action = matcher.group(3);
-		String argument = matcher.group(5);
+		String arguments = matcher.group(5);
 		
-		Command command = Command.build(action, username, argument);
-		return command.execute();
+		Command command = Command.build(action);
+		return command.execute(username, arguments);
 	}
 }

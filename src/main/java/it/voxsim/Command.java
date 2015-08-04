@@ -4,14 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Command {
-	public abstract String execute();
+	public abstract String execute(String username, String argument);
 
 	@SuppressWarnings("serial")
-	public static Command build(String action, String username, String argument) {
+	public static Command build(String action) {
 		Map<String, Class<? extends Command>> commands = new HashMap<String, Class<? extends Command>>() {{
-			put(null, WallCommand.class);
+			put(null, ReadCommand.class);
 			put("->", NewMessageCommand.class);
 			put("follows", FollowCommand.class);
+			put("wall", WallCommand.class);
 		}};
 		
 		try {

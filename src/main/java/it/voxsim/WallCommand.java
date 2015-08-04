@@ -3,8 +3,8 @@ package it.voxsim;
 public class WallCommand extends Command {
 
 	@Override
-	public String execute() {
-		return "no messages in your wall";
+	public String execute(String username, String argument) {
+		return "no messages in " + username + " wall";
 	}
 
 }
