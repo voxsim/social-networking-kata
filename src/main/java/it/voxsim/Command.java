@@ -10,7 +10,7 @@ public abstract class Command {
 	public static Command build(String action) {
 		Map<String, Class<? extends Command>> commands = new HashMap<String, Class<? extends Command>>() {{
 			put(null, ReadCommand.class);
-			put("->", NewMessageCommand.class);
+			put("->", PostCommand.class);
 			put("follows", FollowCommand.class);
 			put("wall", WallCommand.class);
 		}};
