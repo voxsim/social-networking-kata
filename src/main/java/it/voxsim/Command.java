@@ -11,6 +11,7 @@ public abstract class Command {
 		Map<String, Class<? extends Command>> commands = new HashMap<String, Class<? extends Command>>() {{
 			put(null, WallCommand.class);
 			put("->", NewMessageCommand.class);
+			put("follows", FollowCommand.class);
 		}};
 		
 		try {

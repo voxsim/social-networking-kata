@@ -22,6 +22,11 @@ public class SocialNetworkingClientTest {
 	public void sendMessage() throws Exception {
 		typeCommandAndAssertThatLastOutputIs("Alice -> I love the weather today", "");
 	}
+	
+	@Test
+	public void followsAnotherUser() throws Exception {
+		typeCommandAndAssertThatLastOutputIs("Alice follows Charlie", "");
+	}
 
 	@Test
 	@Ignore("It will be red until everything works")
