@@ -1,9 +1,12 @@
 package it.voxsim;
 
+import java.util.List;
+
 public interface UserRepository {
 
-	User findByUsername(String username);
+	List<String> retrieveMessagesByUsername(String username);
 
-	void save(String username);
+	void saveIfNotExist(String username);
 
+	void addMessageTo(String username, String message);
 }

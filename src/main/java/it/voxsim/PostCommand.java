@@ -14,13 +14,8 @@ public class PostCommand extends Command {
 
 	@Override
 	public String execute(String username, String argument) {
-		User user = userRepository.findByUsername(username);
-
-		if (user == null) {
-			userRepository.save(username);
-			user = userRepository.findByUsername(username);
-		}
-
+		userRepository.saveIfNotExist(username);
+		userRepository.addMessageTo(username, argument);
 		return "";
 	}
 }
