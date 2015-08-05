@@ -6,14 +6,15 @@ import java.util.List;
 
 public class InMemoryUserRepository implements UserRepository {
 
-	HashMap<String, List<String>> users = new HashMap<String, List<String>>();
+	private HashMap<String, List<String>> users = new HashMap<String, List<String>>();
 
 	public List<String> retrieveMessagesByUsername(String username) {
 		return users.get(username);
 	}
 
 	public void saveIfNotExist(String username) {
-		users.put(username, new ArrayList<String>());
+		if (users.get(username) == null)
+			users.put(username, new ArrayList<String>());
 	}
 
 	public void addMessageTo(String username, String message) {
