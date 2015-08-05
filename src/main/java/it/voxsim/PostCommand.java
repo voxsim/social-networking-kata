@@ -1,5 +1,7 @@
 package it.voxsim;
 
+import java.util.Calendar;
+
 public class PostCommand extends Command {
 
 	private UserRepository userRepository;
@@ -13,9 +15,9 @@ public class PostCommand extends Command {
 	}
 
 	@Override
-	public String execute(String username, String argument) {
+	public String execute(String username, String argument, Calendar timeOfExecution) {
 		userRepository.saveIfNotExist(username);
-		userRepository.addMessageTo(username, argument);
+		userRepository.addMessageTo(username, argument, timeOfExecution);
 		return "";
 	}
 }

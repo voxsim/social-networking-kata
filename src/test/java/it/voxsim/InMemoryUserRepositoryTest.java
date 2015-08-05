@@ -2,6 +2,8 @@ package it.voxsim;
 
 import static org.junit.Assert.*;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.Before;
@@ -10,8 +12,8 @@ import org.junit.Test;
 public class InMemoryUserRepositoryTest {
 
 	private static final String A_MESSAGE = "message";
-
 	private static final String A_USER = "USER_A";
+	private static final Calendar A_TIME = new GregorianCalendar();
 
 	private InMemoryUserRepository repository;
 
@@ -22,7 +24,7 @@ public class InMemoryUserRepositoryTest {
 
 	@Test
 	public void retrieveMessagesByUsernameShouldRetrieveNullIfUserNotExist() {
-		List<String> messages = repository.retrieveMessagesByUsername(A_USER);
+		List<Message> messages = repository.retrieveMessagesByUsername(A_USER);
 
 		assertNull(messages);
 	}
@@ -31,7 +33,7 @@ public class InMemoryUserRepositoryTest {
 	public void saveIfNotExistAndListOfMessagesShouldBeEmpty() throws Exception {
 		repository.saveIfNotExist(A_USER);
 
-		List<String> messages = repository.retrieveMessagesByUsername(A_USER);
+		List<Message> messages = repository.retrieveMessagesByUsername(A_USER);
 
 		assertNotNull(messages);
 		assertTrue(messages.isEmpty());
@@ -40,25 +42,29 @@ public class InMemoryUserRepositoryTest {
 	@Test
 	public void addMessageToListMessagesOfUser() throws Exception {
 		repository.saveIfNotExist(A_USER);
-		
-		repository.addMessageTo(A_USER, A_MESSAGE);
-		
-		List<String> messages = repository.retrieveMessagesByUsername(A_USER);
+
+		repository.addMessageTo(A_USER, A_MESSAGE, A_TIME);
+
+		List<Message> messages = repository.retrieveMessagesByUsername(A_USER);
 		assertNotNull(messages);
 		assertFalse(messages.isEmpty());
-		assertEquals(A_MESSAGE, messages.get(0));
+		Message message = messages.get(0);
+		assertEquals(A_MESSAGE, message.getDescription());
+		assertEquals(A_TIME, message.getTime());
 	}
 
 	@Test
 	public void saveIfNotExistsShouldNotOverridePreesistentUser() throws Exception {
 		repository.saveIfNotExist(A_USER);
-		repository.addMessageTo(A_USER, A_MESSAGE);
-		
+		repository.addMessageTo(A_USER, A_MESSAGE, A_TIME);
+
 		repository.saveIfNotExist(A_USER);
-		List<String> messages = repository.retrieveMessagesByUsername(A_USER);
+		List<Message> messages = repository.retrieveMessagesByUsername(A_USER);
 
 		assertNotNull(messages);
 		assertFalse(messages.isEmpty());
-		assertEquals(A_MESSAGE, messages.get(0));
+		Message message = messages.get(0);
+		assertEquals(A_MESSAGE, message.getDescription());
+		assertEquals(A_TIME, message.getTime());
 	}
 }

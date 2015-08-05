@@ -1,10 +1,11 @@
 package it.voxsim;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Command {
-	public abstract String execute(String username, String argument);
+	public abstract String execute(String username, String argument, Calendar timeOfExecution);
 
 	@SuppressWarnings("serial")
 	public static Command build(String action) {

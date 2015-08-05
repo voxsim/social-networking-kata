@@ -1,5 +1,6 @@
 package it.voxsim;
 
+import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,8 +14,8 @@ public class SocialNetworkingClient {
 		String username = matcher.group(1);
 		String action = matcher.group(3);
 		String arguments = matcher.group(5);
-		
+
 		Command command = Command.build(action);
-		return command.execute(username, arguments);
+		return command.execute(username, arguments, new GregorianCalendar());
 	}
 }

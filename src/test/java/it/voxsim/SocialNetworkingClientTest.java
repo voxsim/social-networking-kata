@@ -35,7 +35,7 @@ public class SocialNetworkingClientTest {
 
 	@Test
 	@Ignore("It will be red until everything works")
-	public void test() {
+	public void acceptanceTest() {
 		typeCommandAndAssertThatLastOutputIs("Alice -> I love the weather today", "");
 
 		typeCommandAndAssertThatLastOutputIs("Alice", "I love the weather today (5 minutes ago)");
