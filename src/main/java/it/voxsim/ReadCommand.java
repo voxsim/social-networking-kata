@@ -7,7 +7,7 @@ public class ReadCommand extends Command {
 
 	private UserRepository repository;
 	private DeltaTimeTranslator deltaTimeTranslator;
-	
+
 	public ReadCommand() {
 		this(new InMemoryUserRepository(), new EnglishDeltaTimeTranslator());
 	}
@@ -20,14 +20,17 @@ public class ReadCommand extends Command {
 	@Override
 	public String execute(String username, String argument, Calendar timeOfExecution) {
 		List<Message> messages = repository.retrieveMessagesByUsername(username);
-		
-		if(messages == null || messages.isEmpty())
+
+		if (messages == null || messages.isEmpty())
 			return "no messages from " + username;
-		
+
 		String output = "";
-		for(Message message : messages) {
-			output += message.getDescription() + " (" + deltaTimeTranslator.translate(timeOfExecution, message.getTime()) + ")";
+		String separator = "";
+		for (Message message : messages) {
+			String deltaTime = deltaTimeTranslator.translate(timeOfExecution, message.getTime());
+			output += separator + message.getDescription() + " (" + deltaTime + ")";
+			separator = "\n";
 		}
-		return output;
+		return output + "\n";
 	}
 }
