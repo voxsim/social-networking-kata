@@ -12,16 +12,6 @@ public class SocialNetworkingClientTest {
 	public void setUp() {
 		client = new SocialNetworkingClient();
 	}
-
-	@Test
-	public void noMessagesToRead() throws Exception {
-		typeCommandAndAssertThatLastOutputIs("Alice", "no messages from Alice");
-	}
-
-	@Test
-	public void sendMessage() throws Exception {
-		typeCommandAndAssertThatLastOutputIs("Alice -> I love the weather today", "");
-	}
 	
 	@Test
 	public void followsAnotherUser() throws Exception {
