@@ -21,6 +21,5 @@ public class InMemoryMessageRepository implements MessageRepository {
 	public void addMessageTo(String username, String message, Calendar timeOfExecution) {
 		List<Message> messages = messagesByUsername.get(username);
 		messages.add(new Message(message, timeOfExecution));
-		messagesByUsername.put(username, messages);
 	}
 }

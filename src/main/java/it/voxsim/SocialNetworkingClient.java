@@ -6,10 +6,12 @@ import java.util.regex.Pattern;
 
 public class SocialNetworkingClient {
 
-	private MessageRepository repository;
+	private MessageRepository messageRepository;
+	private LinkRepository linkRepository;
 
-	public SocialNetworkingClient(MessageRepository repository) {
-		this.repository = repository;
+	public SocialNetworkingClient(MessageRepository messageRepository, LinkRepository linkRepository) {
+		this.messageRepository = messageRepository;
+		this.linkRepository = linkRepository;
 	}
 
 	public String process(String commandToInterpret, Calendar timeOfExecution) {
@@ -21,7 +23,7 @@ public class SocialNetworkingClient {
 		String action = matcher.group(3);
 		String arguments = matcher.group(5);
 
-		Command command = Command.build(repository, action);
+		Command command = Command.build(messageRepository, linkRepository, action);
 		return command.execute(username, arguments, timeOfExecution);
 	}
 }

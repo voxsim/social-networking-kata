@@ -14,29 +14,40 @@ public class PostCommandTest {
 	private static final String A_MESSAGE = "message";
 	private static final Calendar A_TIME_OF_EXECUTION = new GregorianCalendar();
 
-	private MessageRepository repository;
+	private MessageRepository messageRepository;
+	private InMemoryLinkRepository linkRepository;
 	private PostCommand command;
 
 	@Before
 	public void setUp() {
-		repository = new InMemoryMessageRepository();
-		command = new PostCommand(repository);
+		messageRepository = new InMemoryMessageRepository();
+		linkRepository = new InMemoryLinkRepository();
+		command = new PostCommand(messageRepository, linkRepository);
 	}
 
 	@Test
-	public void firstPostForOneUserShouldSaveThatUser() {
-		assertNull(repository.retrieveMessagesByUsername(A_USER));
+	public void firstPostForOneUserShouldSaveThatUserInMessageRepository() {
+		assertNull(messageRepository.retrieveMessagesByUsername(A_USER));
 
 		command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
 
-		assertNotNull(repository.retrieveMessagesByUsername(A_USER));
+		assertNotNull(messageRepository.retrieveMessagesByUsername(A_USER));
+	}
+	
+	@Test
+	public void firstPostForOneUserShouldSaveThatUserInLinkRepository() {
+		assertNull(linkRepository.retrieveByUsername(A_USER));
+
+		command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
+
+		assertNotNull(linkRepository.retrieveByUsername(A_USER));
 	}
 
 	@Test
 	public void saveMessagePosted() throws Exception {
 		command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
 
-		Message message = repository.retrieveMessagesByUsername(A_USER).get(0);
+		Message message = messageRepository.retrieveMessagesByUsername(A_USER).get(0);
 		assertEquals(A_MESSAGE, message.getDescription());
 		assertEquals(A_TIME_OF_EXECUTION, message.getTime());
 	}

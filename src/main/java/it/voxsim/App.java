@@ -30,8 +30,9 @@ public class App {
 	}
 	
 	public static void main(String[] args) {
-		MessageRepository repository = new InMemoryMessageRepository();
-		SocialNetworkingClient client = new SocialNetworkingClient(repository);
+		MessageRepository messageRepository = new InMemoryMessageRepository();
+		LinkRepository linkRepository = new InMemoryLinkRepository();
+		SocialNetworkingClient client = new SocialNetworkingClient(messageRepository, linkRepository);
 		App app = new App(client);
 		app.run(new InputStreamReader(System.in), System.out);
 	}
