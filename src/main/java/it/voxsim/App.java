@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.Reader;
+import java.util.GregorianCalendar;
 
 public class App {
 	private SocialNetworkingClient client;
@@ -19,7 +20,7 @@ public class App {
 			String command;
 			output.print("> ");
 			while ((command = bufferedReader.readLine()) != null) {
-				output.println(client.process(command));
+				output.println(client.process(command, new GregorianCalendar()));
 				output.print("> ");
 			}
 			input.close();
@@ -29,7 +30,8 @@ public class App {
 	}
 	
 	public static void main(String[] args) {
-		SocialNetworkingClient client = new SocialNetworkingClient();
+		MessageRepository repository = new InMemoryMessageRepository();
+		SocialNetworkingClient client = new SocialNetworkingClient(repository);
 		App app = new App(client);
 		app.run(new InputStreamReader(System.in), System.out);
 	}

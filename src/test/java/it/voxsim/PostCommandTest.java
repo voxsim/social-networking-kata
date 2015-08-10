@@ -14,12 +14,12 @@ public class PostCommandTest {
 	private static final String A_MESSAGE = "message";
 	private static final Calendar A_TIME_OF_EXECUTION = new GregorianCalendar();
 
-	private UserRepository repository;
+	private MessageRepository repository;
 	private PostCommand command;
 
 	@Before
 	public void setUp() {
-		repository = new InMemoryUserRepository();
+		repository = new InMemoryMessageRepository();
 		command = new PostCommand(repository);
 	}
 

@@ -4,20 +4,16 @@ import java.util.Calendar;
 
 public class PostCommand extends Command {
 
-	private UserRepository userRepository;
+	private MessageRepository repository;
 
-	public PostCommand() {
-		this(new InMemoryUserRepository());
-	}
-
-	public PostCommand(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public PostCommand(MessageRepository repository) {
+		this.repository = repository;
 	}
 
 	@Override
 	public String execute(String username, String argument, Calendar timeOfExecution) {
-		userRepository.saveIfNotExist(username);
-		userRepository.addMessageTo(username, argument, timeOfExecution);
+		repository.saveIfNotExist(username);
+		repository.addMessageTo(username, argument, timeOfExecution);
 		return "";
 	}
 }

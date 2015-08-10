@@ -22,13 +22,13 @@ public class ReadCommandTest {
 	private static final Calendar A_TIME_OF_MESSAGE_2 = new GregorianCalendar();
 	private static final Calendar A_TIME_OF_MESSAGE_3 = new GregorianCalendar();
 
-	private UserRepository repository;
+	private MessageRepository repository;
 	private ReadCommand command;
 	private DeltaTimeTranslator deltaTimeTranslator;
 
 	@Before
 	public void setUp() {
-		repository = new InMemoryUserRepository();
+		repository = new InMemoryMessageRepository();
 		deltaTimeTranslator = new EnglishDeltaTimeTranslator();
 		command = new ReadCommand(repository, deltaTimeTranslator);
 	}

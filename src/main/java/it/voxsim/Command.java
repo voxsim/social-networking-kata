@@ -7,17 +7,17 @@ import java.util.Map;
 public abstract class Command {
 	public abstract String execute(String username, String argument, Calendar timeOfExecution);
 
-	@SuppressWarnings("serial")
-	public static Command build(String action) {
-		Map<String, Class<? extends Command>> commands = new HashMap<String, Class<? extends Command>>() {{
-			put(null, ReadCommand.class);
-			put("->", PostCommand.class);
-			put("follows", FollowCommand.class);
-			put("wall", WallCommand.class);
-		}};
-		
+	public static Command build(MessageRepository repository, String action) {
+		DeltaTimeTranslator deltaTimeTranslator = new EnglishDeltaTimeTranslator();
+
+		Map<String, Command> commandDispatcher = new HashMap<String, Command>();
+		commandDispatcher.put(null, new ReadCommand(repository, deltaTimeTranslator));
+		commandDispatcher.put("->", new PostCommand(repository));
+		commandDispatcher.put("follows", new FollowCommand());
+		commandDispatcher.put("wall", new WallCommand());
+
 		try {
-			return commands.get(action).newInstance();
+			return commandDispatcher.get(action);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

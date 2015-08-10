@@ -5,14 +5,10 @@ import java.util.List;
 
 public class ReadCommand extends Command {
 
-	private UserRepository repository;
+	private MessageRepository repository;
 	private DeltaTimeTranslator deltaTimeTranslator;
 
-	public ReadCommand() {
-		this(new InMemoryUserRepository(), new EnglishDeltaTimeTranslator());
-	}
-
-	public ReadCommand(UserRepository repository, DeltaTimeTranslator deltaTimeTranslator) {
+	public ReadCommand(MessageRepository repository, DeltaTimeTranslator deltaTimeTranslator) {
 		this.repository = repository;
 		this.deltaTimeTranslator = deltaTimeTranslator;
 	}

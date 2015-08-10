@@ -9,17 +9,17 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-public class InMemoryUserRepositoryTest {
+public class InMemoryMessageRepositoryTest {
 
 	private static final String A_MESSAGE = "message";
 	private static final String A_USER = "USER_A";
 	private static final Calendar A_TIME = new GregorianCalendar();
 
-	private InMemoryUserRepository repository;
+	private InMemoryMessageRepository repository;
 
 	@Before
 	public void setUp() {
-		repository = new InMemoryUserRepository();
+		repository = new InMemoryMessageRepository();
 	}
 
 	@Test

@@ -1,5 +1,8 @@
 package it.voxsim;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -10,36 +13,53 @@ public class SocialNetworkingClientTest {
 
 	@Before
 	public void setUp() {
-		client = new SocialNetworkingClient();
+		MessageRepository repository = new InMemoryMessageRepository();
+		client = new SocialNetworkingClient(repository);
 	}
-	
+
 	@Test
 	public void followsAnotherUser() throws Exception {
-		typeCommandAndAssertThatLastOutputIs("Alice follows Charlie", "");
+		typeCommandAndAssertThatOutputIs("Alice follows Charlie", "");
+	}
+
+	@Test
+	public void showUserWall() throws Exception {
+		typeCommandAndAssertThatOutputIs("Alice wall", "no messages in Alice wall");
 	}
 	
 	@Test
-	public void showUserWall() throws Exception {
-		typeCommandAndAssertThatLastOutputIs("Alice wall", "no messages in Alice wall");
+	public void firstPieceOfAcceptanceTest() throws Exception {
+		GregorianCalendar timeFirstMessage = new GregorianCalendar();
+		GregorianCalendar timeSecondMessage = new GregorianCalendar();
+		timeFirstMessage.setTimeInMillis(timeSecondMessage.getTimeInMillis() - 5 * 60 * 1000);
+		
+		typeCommandAndAssertThatOutputIs("Alice -> I love the weather today", "", timeFirstMessage);
+
+		typeCommandAndAssertThatOutputIs("Alice", "I love the weather today (5 minutes ago)\n", timeSecondMessage);
 	}
+	
 
 	@Test
 	@Ignore("It will be red until everything works")
 	public void acceptanceTest() {
-		typeCommandAndAssertThatLastOutputIs("Alice -> I love the weather today", "");
+		typeCommandAndAssertThatOutputIs("Alice -> I love the weather today", "");
 
-		typeCommandAndAssertThatLastOutputIs("Alice", "I love the weather today (5 minutes ago)");
+		typeCommandAndAssertThatOutputIs("Alice", "I love the weather today (5 minutes ago)\n");
+		
+		typeCommandAndAssertThatOutputIs("Alice follows Charlie", "");
 
-		typeCommandAndAssertThatLastOutputIs("Alice follows Charlie", "");
+		typeCommandAndAssertThatOutputIs("Charlie -> I'm in New York today!", "");
 
-		typeCommandAndAssertThatLastOutputIs("Charlie -> I'm in New York today!", "");
-
-		typeCommandAndAssertThatLastOutputIs("Alice wall", "Charlie - I'm in New York today! (15 seconds ago)\n" + 
-														   "Alice - I love the weather today (5 minutes ago)");
+		typeCommandAndAssertThatOutputIs("Alice wall", "Charlie - I'm in New York today! (15 seconds ago)\n"
+				+ "Alice - I love the weather today (5 minutes ago)");
 	}
 
-	private void typeCommandAndAssertThatLastOutputIs(String command, String expectedOutput) {
-		String actualOutput = client.process(command);
+	private void typeCommandAndAssertThatOutputIs(String command, String expectedOutput) {
+		typeCommandAndAssertThatOutputIs(command, expectedOutput, new GregorianCalendar());
+	}
+
+	private void typeCommandAndAssertThatOutputIs(String command, String expectedOutput, Calendar timeOfExecution) {
+		String actualOutput = client.process(command, timeOfExecution);
 		Assert.assertEquals(expectedOutput, actualOutput);
 	}
 }

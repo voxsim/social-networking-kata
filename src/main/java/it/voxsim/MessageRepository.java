@@ -3,7 +3,7 @@ package it.voxsim;
 import java.util.Calendar;
 import java.util.List;
 
-public interface UserRepository {
+public interface MessageRepository {
 
 	List<Message> retrieveMessagesByUsername(String username);
 
