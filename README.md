@@ -39,5 +39,12 @@ wall: <user name> wall
 Don't worry about handling any exceptions or invalid commands. Assume that the user will always type the correct commands. Just focus on the sunny day scenarios.
 Don’t bother making it work over a network or across processes. It can all be done in memory, assuming that users will all use the same terminal.
 Non-existing users should be created as they post their first message. Application should not start with a pre-defined list of users.
-Exercise should be done either in Java or C#.
-Provide instructions on how to run the application.
+
+Instructions
+
+mvn clean
+mvn install
+
+Run: mvn exec:java -Dexec.mainClass=it.voxsim.App
+
+Test: mvn test
