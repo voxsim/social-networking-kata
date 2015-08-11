@@ -71,10 +71,16 @@ Non-existing users should be created as they post their first message. Applicati
 
 Instructions
 ============
-
+Clean and install the project
+```
 mvn clean
 mvn install
-
-Run: mvn exec:java -Dexec.mainClass=it.voxsim.App
-
-Test: mvn test
+```
+Run
+```
+mvn exec:java -Dexec.mainClass=it.voxsim.App
+```
+Test
+```
+mvn test
+```
