@@ -1,10 +1,10 @@
 package it.voxsim;
 
-import java.util.List;
+import java.util.Set;
 
 public interface LinkRepository {
 
-	List<String> retrieveByUsername(String username);
+	Set<String> retrieveByUsername(String username);
 
 	void addTo(String username, String argument);
 
