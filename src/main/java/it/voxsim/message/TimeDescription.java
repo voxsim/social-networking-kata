@@ -1,4 +1,4 @@
-package it.voxsim;
+package it.voxsim.message;
 
 public class TimeDescription {
 	public static final TimeDescription ZERO_SECOND = new TimeDescription(0, TimeType.SECOND);

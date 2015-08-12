@@ -2,9 +2,6 @@ package it.voxsim.message;
 
 import java.util.Calendar;
 
-import it.voxsim.DeltaTimeTranslator;
-import it.voxsim.EnglishDeltaTimeTranslator;
-
 public class Message implements Comparable<Message> {
 
 	private String description;

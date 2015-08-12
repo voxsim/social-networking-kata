@@ -1,4 +1,4 @@
-package it.voxsim;
+package it.voxsim.message;
 
 public enum TimeType {
 	SECOND,
