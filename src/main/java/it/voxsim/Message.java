@@ -6,10 +6,16 @@ public class Message {
 
 	private String description;
 	private Calendar time;
+	private String user;
 
-	public Message(String description, Calendar time) {
+	public Message(String user, String description, Calendar time) {
+		this.user = user;
 		this.description = description;
 		this.time = time;
+	}
+
+	public String getUser() {
+		return this.user;
 	}
 
 	public String getDescription() {

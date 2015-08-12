@@ -1,6 +1,8 @@
 package it.voxsim;
 
-import static org.junit.Assert.*;
+import static it.voxsim.AssertUtils.assertEmpty;
+import static it.voxsim.AssertUtils.assertNotEmpty;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -27,20 +29,18 @@ public class PostCommandTest {
 
 	@Test
 	public void firstPostForOneUserShouldSaveThatUserInMessageRepository() {
-		assertNull(messageRepository.retrieveMessagesByUsername(A_USER));
+		assertEmpty(messageRepository.retrieveMessagesByUsername(A_USER));
 
 		command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
 
-		assertNotNull(messageRepository.retrieveMessagesByUsername(A_USER));
+		assertNotEmpty(messageRepository.retrieveMessagesByUsername(A_USER));
 	}
-	
+
 	@Test
 	public void firstPostForOneUserShouldSaveThatUserInLinkRepository() {
-		assertNull(linkRepository.retrieveByUsername(A_USER));
-
 		command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
 
-		assertNotNull(linkRepository.retrieveByUsername(A_USER));
+		assertEmpty(linkRepository.retrieveByUsername(A_USER));
 	}
 
 	@Test

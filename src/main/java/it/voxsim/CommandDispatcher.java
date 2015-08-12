@@ -11,7 +11,7 @@ public class CommandDispatcher {
 		commandDispatcher.put(null, new ReadCommand(messageRepository, deltaTimeTranslator));
 		commandDispatcher.put("->", new PostCommand(messageRepository, linkRepository));
 		commandDispatcher.put("follows", new FollowCommand(linkRepository));
-		commandDispatcher.put("wall", new WallCommand());
+		commandDispatcher.put("wall", new WallCommand(messageRepository, linkRepository, deltaTimeTranslator));
 	}
 
 	public Command dispatch(String action) {

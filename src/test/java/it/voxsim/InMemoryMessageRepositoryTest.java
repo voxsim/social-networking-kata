@@ -1,6 +1,9 @@
 package it.voxsim;
 
-import static org.junit.Assert.*;
+import static it.voxsim.AssertUtils.assertEmpty;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -23,20 +26,12 @@ public class InMemoryMessageRepositoryTest {
 	}
 
 	@Test
-	public void retrieveMessagesByUsernameShouldRetrieveNullIfUserNotExist() {
-		List<Message> messages = repository.retrieveMessagesByUsername(A_USER);
-
-		assertNull(messages);
-	}
-
-	@Test
 	public void saveIfNotExistAndListOfMessagesShouldBeEmpty() throws Exception {
 		repository.saveIfNotExist(A_USER);
 
 		List<Message> messages = repository.retrieveMessagesByUsername(A_USER);
 
-		assertNotNull(messages);
-		assertTrue(messages.isEmpty());
+		assertEmpty(messages);
 	}
 
 	@Test

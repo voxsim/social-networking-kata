@@ -10,7 +10,10 @@ public class InMemoryLinkRepository implements LinkRepository {
 	private Map<String, Set<String>> linksByUsername = new HashMap<String, Set<String>>();
 
 	public Set<String> retrieveByUsername(String username) {
-		return linksByUsername.get(username);
+		Set<String> links = linksByUsername.get(username);
+		if(links == null)
+			return new HashSet<>();
+		return links;
 	}
 
 	public void saveIfNotExist(String username) {

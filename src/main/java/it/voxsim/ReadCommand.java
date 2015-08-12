@@ -27,6 +27,6 @@ public class ReadCommand implements Command {
 			output += separator + message.getDescription() + " (" + deltaTime + ")";
 			separator = "\n";
 		}
-		return output + "\n";
+		return output;
 	}
 }

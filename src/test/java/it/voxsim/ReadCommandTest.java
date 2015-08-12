@@ -47,7 +47,7 @@ public class ReadCommandTest {
 
 		String output = command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
 
-		assertEquals(A_MESSAGE + " " + A_DELTA_TIME + "\n", output);
+		assertEquals(A_MESSAGE + " " + A_DELTA_TIME, output);
 	}
 
 	@Test
@@ -63,6 +63,6 @@ public class ReadCommandTest {
 		String output = command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
 
 		assertEquals(A_MESSAGE + " " + A_DELTA_TIME + "\n" + A_MESSAGE_2 + " " + A_DELTA_TIME_2 + "\n" + A_MESSAGE_3
-				+ " " + A_DELTA_TIME_3 + "\n", output);
+				+ " " + A_DELTA_TIME_3, output);
 	}
 }

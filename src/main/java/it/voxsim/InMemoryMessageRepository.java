@@ -10,7 +10,10 @@ public class InMemoryMessageRepository implements MessageRepository {
 	private HashMap<String, List<Message>> messagesByUsername = new HashMap<String, List<Message>>();
 
 	public List<Message> retrieveMessagesByUsername(String username) {
-		return messagesByUsername.get(username);
+		List<Message> messages = messagesByUsername.get(username);
+		if(messages == null)
+			return new ArrayList<>();
+		return messages;
 	}
 
 	public void saveIfNotExist(String username) {
@@ -20,6 +23,6 @@ public class InMemoryMessageRepository implements MessageRepository {
 
 	public void addMessageTo(String username, String message, Calendar timeOfExecution) {
 		List<Message> messages = messagesByUsername.get(username);
-		messages.add(new Message(message, timeOfExecution));
+		messages.add(new Message(username, message, timeOfExecution));
 	}
 }
