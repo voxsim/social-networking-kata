@@ -10,10 +10,10 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.voxsim.InMemoryLinkRepository;
-import it.voxsim.InMemoryMessageRepository;
-import it.voxsim.MessageRepository;
 import it.voxsim.message.Message;
+import it.voxsim.repository.InMemoryLinkRepository;
+import it.voxsim.repository.InMemoryMessageRepository;
+import it.voxsim.repository.MessageRepository;
 
 public class PostCommandTest {
 

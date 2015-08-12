@@ -1,4 +1,4 @@
-package it.voxsim;
+package it.voxsim.repository;
 
 import java.util.Set;
 

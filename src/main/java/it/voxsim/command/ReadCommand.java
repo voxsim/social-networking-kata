@@ -3,8 +3,8 @@ package it.voxsim.command;
 import java.util.Calendar;
 import java.util.List;
 
-import it.voxsim.MessageRepository;
 import it.voxsim.message.Message;
+import it.voxsim.repository.MessageRepository;
 
 public class ReadCommand implements Command {
 

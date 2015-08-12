@@ -2,8 +2,8 @@ package it.voxsim.command;
 
 import java.util.Calendar;
 
-import it.voxsim.LinkRepository;
-import it.voxsim.MessageRepository;
+import it.voxsim.repository.LinkRepository;
+import it.voxsim.repository.MessageRepository;
 
 public class PostCommand implements Command {
 

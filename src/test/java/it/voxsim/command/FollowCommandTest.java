@@ -8,8 +8,8 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import it.voxsim.InMemoryLinkRepository;
-import it.voxsim.LinkRepository;
+import it.voxsim.repository.InMemoryLinkRepository;
+import it.voxsim.repository.LinkRepository;
 
 public class FollowCommandTest {
 

@@ -7,9 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import it.voxsim.LinkRepository;
-import it.voxsim.MessageRepository;
 import it.voxsim.message.Message;
+import it.voxsim.repository.LinkRepository;
+import it.voxsim.repository.MessageRepository;
 
 public class WallCommand implements Command {
 

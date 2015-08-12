@@ -6,6 +6,11 @@ import java.io.PrintStream;
 import java.io.Reader;
 import java.util.GregorianCalendar;
 
+import it.voxsim.repository.InMemoryLinkRepository;
+import it.voxsim.repository.InMemoryMessageRepository;
+import it.voxsim.repository.LinkRepository;
+import it.voxsim.repository.MessageRepository;
+
 public class App {
 	private SocialNetworkingClient client;
 

@@ -8,6 +8,8 @@ import it.voxsim.command.FollowCommand;
 import it.voxsim.command.PostCommand;
 import it.voxsim.command.ReadCommand;
 import it.voxsim.command.WallCommand;
+import it.voxsim.repository.LinkRepository;
+import it.voxsim.repository.MessageRepository;
 
 public class CommandDispatcher {
 	private Map<String, Command> commandDispatcher;

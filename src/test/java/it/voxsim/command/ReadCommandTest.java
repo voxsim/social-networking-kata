@@ -8,8 +8,8 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.voxsim.InMemoryMessageRepository;
-import it.voxsim.MessageRepository;
+import it.voxsim.repository.InMemoryMessageRepository;
+import it.voxsim.repository.MessageRepository;
 
 public class ReadCommandTest {
 
@@ -53,8 +53,9 @@ public class ReadCommandTest {
 
 	@Test
 	public void multipleMessagesFromUser() {
-		A_TIME_OF_MESSAGE_2.setTimeInMillis(A_TIME_OF_MESSAGE.getTimeInMillis() - 60000);
-		A_TIME_OF_MESSAGE_3.setTimeInMillis(A_TIME_OF_MESSAGE.getTimeInMillis() - 2 * 60 * 60000);
+		A_TIME_OF_MESSAGE.setTimeInMillis(A_TIME_OF_EXECUTION.getTimeInMillis());
+		A_TIME_OF_MESSAGE_2.setTimeInMillis(A_TIME_OF_EXECUTION.getTimeInMillis() - 60000);
+		A_TIME_OF_MESSAGE_3.setTimeInMillis(A_TIME_OF_EXECUTION.getTimeInMillis() - 2 * 60 * 60000);
 
 		repository.saveIfNotExist(A_USER);
 		repository.addMessageTo(A_USER, A_MESSAGE, A_TIME_OF_MESSAGE);

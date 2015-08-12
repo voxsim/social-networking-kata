@@ -7,6 +7,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.voxsim.repository.InMemoryLinkRepository;
+import it.voxsim.repository.InMemoryMessageRepository;
+import it.voxsim.repository.LinkRepository;
+import it.voxsim.repository.MessageRepository;
+
 public class SocialNetworkingClientTest {
 	private SocialNetworkingClient client;
 

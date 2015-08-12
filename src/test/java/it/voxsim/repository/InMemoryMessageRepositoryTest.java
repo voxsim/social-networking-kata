@@ -1,4 +1,4 @@
-package it.voxsim;
+package it.voxsim.repository;
 
 import static it.voxsim.AssertUtils.assertEmpty;
 import static org.junit.Assert.assertFalse;
