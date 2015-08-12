@@ -30,10 +30,16 @@ public class App {
 	}
 	
 	public static void main(String[] args) {
-		MessageRepository messageRepository = new InMemoryMessageRepository();
-		LinkRepository linkRepository = new InMemoryLinkRepository();
-		SocialNetworkingClient client = new SocialNetworkingClient(messageRepository, linkRepository);
+		CommandDispatcher commandDispatcher = createCommandDispatcher();
+		SocialNetworkingClient client = new SocialNetworkingClient(commandDispatcher);
 		App app = new App(client);
 		app.run(new InputStreamReader(System.in), System.out);
+	}
+
+	private static CommandDispatcher createCommandDispatcher() {
+		MessageRepository messageRepository = new InMemoryMessageRepository();
+		LinkRepository linkRepository = new InMemoryLinkRepository();
+		DeltaTimeTranslator deltaTimeTranslator = new EnglishDeltaTimeTranslator();
+		return new CommandDispatcher(messageRepository, linkRepository, deltaTimeTranslator);
 	}
 }

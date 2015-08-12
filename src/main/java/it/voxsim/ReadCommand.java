@@ -3,19 +3,19 @@ package it.voxsim;
 import java.util.Calendar;
 import java.util.List;
 
-public class ReadCommand extends Command {
+public class ReadCommand implements Command {
 
-	private MessageRepository repository;
+	private MessageRepository messageRepository;
 	private DeltaTimeTranslator deltaTimeTranslator;
 
-	public ReadCommand(MessageRepository repository, DeltaTimeTranslator deltaTimeTranslator) {
-		this.repository = repository;
+	public ReadCommand(MessageRepository messageRepository, DeltaTimeTranslator deltaTimeTranslator) {
+		this.messageRepository = messageRepository;
 		this.deltaTimeTranslator = deltaTimeTranslator;
 	}
 
 	@Override
 	public String execute(String username, String argument, Calendar timeOfExecution) {
-		List<Message> messages = repository.retrieveMessagesByUsername(username);
+		List<Message> messages = messageRepository.retrieveMessagesByUsername(username);
 
 		if (messages == null || messages.isEmpty())
 			return "no messages from " + username;

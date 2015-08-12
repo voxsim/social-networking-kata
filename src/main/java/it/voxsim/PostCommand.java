@@ -2,7 +2,7 @@ package it.voxsim;
 
 import java.util.Calendar;
 
-public class PostCommand extends Command {
+public class PostCommand implements Command {
 
 	private MessageRepository messageRepository;
 	private LinkRepository linkRepository;

@@ -2,7 +2,7 @@ package it.voxsim;
 
 import java.util.Calendar;
 
-public class WallCommand extends Command {
+public class WallCommand implements Command {
 
 	@Override
 	public String execute(String username, String argument, Calendar timeOfExecution) {
