@@ -25,7 +25,11 @@ public class App {
 			String command;
 			output.print("> ");
 			while ((command = bufferedReader.readLine()) != null) {
-				output.println(client.process(command, new GregorianCalendar()));
+				String result = client.process(command, new GregorianCalendar());
+
+				if (!result.isEmpty())
+					output.println(result);
+
 				output.print("> ");
 			}
 			input.close();
@@ -33,7 +37,7 @@ public class App {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		CommandDispatcher commandDispatcher = createCommandDispatcher();
 		SocialNetworkingClient client = new SocialNetworkingClient(commandDispatcher);

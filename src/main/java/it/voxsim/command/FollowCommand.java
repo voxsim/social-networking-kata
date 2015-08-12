@@ -17,5 +17,4 @@ public class FollowCommand implements Command {
 		repository.addTo(username, argument);
 		return "";
 	}
-
 }
