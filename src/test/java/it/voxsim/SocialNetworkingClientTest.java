@@ -1,5 +1,8 @@
 package it.voxsim;
 
+import static it.voxsim.AssertUtils.ONE_MINUTE;
+import static it.voxsim.AssertUtils.ONE_SECOND;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -7,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.voxsim.message.EnhacedCalendar;
 import it.voxsim.repository.InMemoryLinkRepository;
 import it.voxsim.repository.InMemoryMessageRepository;
 import it.voxsim.repository.LinkRepository;
@@ -30,23 +34,21 @@ public class SocialNetworkingClientTest {
 
 	@Test
 	public void acceptanceTest() throws Exception {
-		GregorianCalendar timeFirstMessage = new GregorianCalendar();
-		GregorianCalendar timeSecondMessage = new GregorianCalendar();
-		timeFirstMessage.setTimeInMillis(timeSecondMessage.getTimeInMillis() - 5 * 60 * 1000);
-		GregorianCalendar timeThirdMessage = new GregorianCalendar();
-		GregorianCalendar timeFourthMessage = new GregorianCalendar();
-		timeThirdMessage.setTimeInMillis(timeFourthMessage.getTimeInMillis() - 15 * 1000);
+		GregorianCalendar timeRead = new EnhacedCalendar();
+		GregorianCalendar timePosting = new EnhacedCalendar(timeRead, 5 * ONE_MINUTE);
+		GregorianCalendar timeSecondPosting = new EnhacedCalendar(timeRead, 15 * ONE_SECOND);
+		GregorianCalendar timeWall = timeRead;
 
-		typeCommandAndAssertThatOutputIs("Alice -> I love the weather today", "", timeFirstMessage);
+		typeCommandAndAssertThatOutputIs("Alice -> I love the weather today", "", timePosting);
 
-		typeCommandAndAssertThatOutputIs("Alice", "I love the weather today (5 minutes ago)", timeSecondMessage);
+		typeCommandAndAssertThatOutputIs("Alice", "I love the weather today (5 minutes ago)", timeRead);
 
 		typeCommandAndAssertThatOutputIs("Alice follows Charlie", "");
 
-		typeCommandAndAssertThatOutputIs("Charlie -> I'm in New York today!", "", timeThirdMessage);
+		typeCommandAndAssertThatOutputIs("Charlie -> I'm in New York today!", "", timeSecondPosting);
 
 		typeCommandAndAssertThatOutputIs("Alice wall", "Charlie - I'm in New York today! (15 seconds ago)\n"
-				+ "Alice - I love the weather today (5 minutes ago)", timeFourthMessage);
+				+ "Alice - I love the weather today (5 minutes ago)", timeWall);
 	}
 
 	private void typeCommandAndAssertThatOutputIs(String command, String expectedOutput) {

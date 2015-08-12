@@ -1,5 +1,7 @@
 package it.voxsim.command;
 
+import static it.voxsim.AssertUtils.ONE_HOUR;
+import static it.voxsim.AssertUtils.ONE_MINUTE;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
@@ -8,6 +10,7 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.voxsim.message.EnhacedCalendar;
 import it.voxsim.repository.InMemoryLinkRepository;
 import it.voxsim.repository.InMemoryMessageRepository;
 import it.voxsim.repository.LinkRepository;
@@ -24,9 +27,9 @@ public class WallCommandTest {
 	private static final String A_DELTA_TIME_2 = "(1 minute ago)";
 	private static final String A_DELTA_TIME_3 = "(2 hours ago)";
 	private static final Calendar A_TIME_OF_EXECUTION = new GregorianCalendar();
-	private static final Calendar A_TIME_OF_MESSAGE = new GregorianCalendar();
-	private static final Calendar A_TIME_OF_MESSAGE_2 = new GregorianCalendar();
-	private static final Calendar A_TIME_OF_MESSAGE_3 = new GregorianCalendar();
+	private static final Calendar A_TIME_OF_MESSAGE = A_TIME_OF_EXECUTION;
+	private static final Calendar A_TIME_OF_MESSAGE_2 = new EnhacedCalendar(A_TIME_OF_EXECUTION, ONE_MINUTE);
+	private static final Calendar A_TIME_OF_MESSAGE_3 = new EnhacedCalendar(A_TIME_OF_EXECUTION, 2 * ONE_HOUR);
 
 	private MessageRepository messageRepository;
 	private WallCommand command;
@@ -34,9 +37,6 @@ public class WallCommandTest {
 
 	@Before
 	public void setUp() {
-		A_TIME_OF_MESSAGE_2.setTimeInMillis(A_TIME_OF_MESSAGE.getTimeInMillis() - 60000);
-		A_TIME_OF_MESSAGE_3.setTimeInMillis(A_TIME_OF_MESSAGE.getTimeInMillis() - 2 * 60 * 60000);
-
 		messageRepository = new InMemoryMessageRepository();
 		linkRepository = new InMemoryLinkRepository();
 		command = new WallCommand(messageRepository, linkRepository);
