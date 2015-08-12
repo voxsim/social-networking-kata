@@ -3,6 +3,12 @@ package it.voxsim;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.voxsim.command.Command;
+import it.voxsim.command.FollowCommand;
+import it.voxsim.command.PostCommand;
+import it.voxsim.command.ReadCommand;
+import it.voxsim.command.WallCommand;
+
 public class CommandDispatcher {
 	private Map<String, Command> commandDispatcher;
 

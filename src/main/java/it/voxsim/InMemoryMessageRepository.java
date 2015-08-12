@@ -12,7 +12,7 @@ public class InMemoryMessageRepository implements MessageRepository {
 	public List<Message> retrieveMessagesByUsername(String username) {
 		List<Message> messages = messagesByUsername.get(username);
 		if(messages == null)
-			return new ArrayList<>();
+			return new ArrayList<Message>();
 		return messages;
 	}
 

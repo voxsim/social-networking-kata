@@ -1,4 +1,4 @@
-package it.voxsim;
+package it.voxsim.command;
 
 import java.util.Calendar;
 

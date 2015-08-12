@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import it.voxsim.command.Command;
+
 public class SocialNetworkingClient {
 
 	private CommandDispatcher commandFactory;

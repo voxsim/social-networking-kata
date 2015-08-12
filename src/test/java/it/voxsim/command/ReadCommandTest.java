@@ -1,12 +1,17 @@
-package it.voxsim;
+package it.voxsim.command;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import it.voxsim.DeltaTimeTranslator;
+import it.voxsim.EnglishDeltaTimeTranslator;
+import it.voxsim.InMemoryMessageRepository;
+import it.voxsim.MessageRepository;
 
 public class ReadCommandTest {
 

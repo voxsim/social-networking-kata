@@ -1,7 +1,11 @@
-package it.voxsim;
+package it.voxsim.command;
 
 import java.util.Calendar;
 import java.util.List;
+
+import it.voxsim.DeltaTimeTranslator;
+import it.voxsim.Message;
+import it.voxsim.MessageRepository;
 
 public class ReadCommand implements Command {
 
@@ -17,7 +21,7 @@ public class ReadCommand implements Command {
 	public String execute(String username, String argument, Calendar timeOfExecution) {
 		List<Message> messages = messageRepository.retrieveMessagesByUsername(username);
 
-		if (messages == null || messages.isEmpty())
+		if (messages.isEmpty())
 			return "no messages from " + username;
 
 		String output = "";

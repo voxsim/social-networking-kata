@@ -1,4 +1,4 @@
-package it.voxsim;
+package it.voxsim.command;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,6 +7,11 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import it.voxsim.DeltaTimeTranslator;
+import it.voxsim.LinkRepository;
+import it.voxsim.Message;
+import it.voxsim.MessageRepository;
 
 public class WallCommand implements Command {
 
@@ -27,7 +32,7 @@ public class WallCommand implements Command {
 		List<Message> messages = retrieveMessagesFromLinks(links);
 		Collections.sort(messages, new MessageComparator());
 
-		if (messages == null || messages.isEmpty())
+		if (messages.isEmpty())
 			return "no messages in " + username + " wall";
 
 		String output = "";
@@ -47,7 +52,7 @@ public class WallCommand implements Command {
 	}
 
 	private List<Message> retrieveMessagesFromLinks(Set<String> links) {
-		List<Message> messages = new ArrayList<>();
+		List<Message> messages = new ArrayList<Message>();
 		Iterator<String> iterator = links.iterator();
 		while (iterator.hasNext()) {
 			String user = iterator.next();

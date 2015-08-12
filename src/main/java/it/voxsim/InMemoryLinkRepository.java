@@ -12,7 +12,7 @@ public class InMemoryLinkRepository implements LinkRepository {
 	public Set<String> retrieveByUsername(String username) {
 		Set<String> links = linksByUsername.get(username);
 		if(links == null)
-			return new HashSet<>();
+			return new HashSet<String>();
 		return links;
 	}
 

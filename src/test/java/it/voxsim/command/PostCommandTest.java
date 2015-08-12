@@ -1,4 +1,4 @@
-package it.voxsim;
+package it.voxsim.command;
 
 import static it.voxsim.AssertUtils.assertEmpty;
 import static it.voxsim.AssertUtils.assertNotEmpty;
@@ -9,6 +9,11 @@ import java.util.GregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import it.voxsim.InMemoryLinkRepository;
+import it.voxsim.InMemoryMessageRepository;
+import it.voxsim.Message;
+import it.voxsim.MessageRepository;
 
 public class PostCommandTest {
 

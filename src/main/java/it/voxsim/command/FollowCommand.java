@@ -1,6 +1,8 @@
-package it.voxsim;
+package it.voxsim.command;
 
 import java.util.Calendar;
+
+import it.voxsim.LinkRepository;
 
 public class FollowCommand implements Command {
 

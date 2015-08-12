@@ -1,4 +1,4 @@
-package it.voxsim;
+package it.voxsim.command;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -7,6 +7,9 @@ import java.util.GregorianCalendar;
 import java.util.Set;
 
 import org.junit.Test;
+
+import it.voxsim.InMemoryLinkRepository;
+import it.voxsim.LinkRepository;
 
 public class FollowCommandTest {
 
