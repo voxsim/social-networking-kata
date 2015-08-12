@@ -5,13 +5,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import it.voxsim.message.Message;
+
 public class InMemoryMessageRepository implements MessageRepository {
 
 	private HashMap<String, List<Message>> messagesByUsername = new HashMap<String, List<Message>>();
 
 	public List<Message> retrieveMessagesByUsername(String username) {
 		List<Message> messages = messagesByUsername.get(username);
-		if(messages == null)
+		if (messages == null)
 			return new ArrayList<Message>();
 		return messages;
 	}
@@ -23,6 +25,6 @@ public class InMemoryMessageRepository implements MessageRepository {
 
 	public void addMessageTo(String username, String message, Calendar timeOfExecution) {
 		List<Message> messages = messagesByUsername.get(username);
-		messages.add(new Message(username, message, timeOfExecution));
+		messages.add(Message.create(username, message, timeOfExecution));
 	}
 }

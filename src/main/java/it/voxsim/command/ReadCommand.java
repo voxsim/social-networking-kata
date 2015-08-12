@@ -3,18 +3,15 @@ package it.voxsim.command;
 import java.util.Calendar;
 import java.util.List;
 
-import it.voxsim.DeltaTimeTranslator;
-import it.voxsim.Message;
 import it.voxsim.MessageRepository;
+import it.voxsim.message.Message;
 
 public class ReadCommand implements Command {
 
 	private MessageRepository messageRepository;
-	private DeltaTimeTranslator deltaTimeTranslator;
 
-	public ReadCommand(MessageRepository messageRepository, DeltaTimeTranslator deltaTimeTranslator) {
+	public ReadCommand(MessageRepository messageRepository) {
 		this.messageRepository = messageRepository;
-		this.deltaTimeTranslator = deltaTimeTranslator;
 	}
 
 	@Override
@@ -27,8 +24,7 @@ public class ReadCommand implements Command {
 		String output = "";
 		String separator = "";
 		for (Message message : messages) {
-			String deltaTime = deltaTimeTranslator.translate(timeOfExecution, message.getTime());
-			output += separator + message.getDescription() + " (" + deltaTime + ")";
+			output += separator + message.description("%{description} (%{time})", timeOfExecution);
 			separator = "\n";
 		}
 		return output;

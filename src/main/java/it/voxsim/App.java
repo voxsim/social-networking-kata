@@ -39,7 +39,6 @@ public class App {
 	private static CommandDispatcher createCommandDispatcher() {
 		MessageRepository messageRepository = new InMemoryMessageRepository();
 		LinkRepository linkRepository = new InMemoryLinkRepository();
-		DeltaTimeTranslator deltaTimeTranslator = new EnglishDeltaTimeTranslator();
-		return new CommandDispatcher(messageRepository, linkRepository, deltaTimeTranslator);
+		return new CommandDispatcher(messageRepository, linkRepository);
 	}
 }

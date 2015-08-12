@@ -1,7 +1,6 @@
 package it.voxsim;
 
 import static it.voxsim.AssertUtils.assertEmpty;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
@@ -11,6 +10,8 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import it.voxsim.message.Message;
 
 public class InMemoryMessageRepositoryTest {
 
@@ -44,8 +45,7 @@ public class InMemoryMessageRepositoryTest {
 		assertNotNull(messages);
 		assertFalse(messages.isEmpty());
 		Message message = messages.get(0);
-		assertEquals(A_MESSAGE, message.getDescription());
-		assertEquals(A_TIME, message.getTime());
+		assertNotNull(A_MESSAGE, message);
 	}
 
 	@Test
@@ -59,7 +59,6 @@ public class InMemoryMessageRepositoryTest {
 		assertNotNull(messages);
 		assertFalse(messages.isEmpty());
 		Message message = messages.get(0);
-		assertEquals(A_MESSAGE, message.getDescription());
-		assertEquals(A_TIME, message.getTime());
+		assertNotNull(A_MESSAGE, message);
 	}
 }

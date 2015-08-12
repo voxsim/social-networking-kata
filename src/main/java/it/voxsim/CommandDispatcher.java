@@ -12,12 +12,12 @@ import it.voxsim.command.WallCommand;
 public class CommandDispatcher {
 	private Map<String, Command> commandDispatcher;
 
-	public CommandDispatcher(MessageRepository messageRepository, LinkRepository linkRepository, DeltaTimeTranslator deltaTimeTranslator) {
+	public CommandDispatcher(MessageRepository messageRepository, LinkRepository linkRepository) {
 		commandDispatcher = new HashMap<String, Command>();
-		commandDispatcher.put(null, new ReadCommand(messageRepository, deltaTimeTranslator));
+		commandDispatcher.put(null, new ReadCommand(messageRepository));
 		commandDispatcher.put("->", new PostCommand(messageRepository, linkRepository));
 		commandDispatcher.put("follows", new FollowCommand(linkRepository));
-		commandDispatcher.put("wall", new WallCommand(messageRepository, linkRepository, deltaTimeTranslator));
+		commandDispatcher.put("wall", new WallCommand(messageRepository, linkRepository));
 	}
 
 	public Command dispatch(String action) {

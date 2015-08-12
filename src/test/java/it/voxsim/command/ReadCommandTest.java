@@ -8,8 +8,6 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.voxsim.DeltaTimeTranslator;
-import it.voxsim.EnglishDeltaTimeTranslator;
 import it.voxsim.InMemoryMessageRepository;
 import it.voxsim.MessageRepository;
 
@@ -29,13 +27,11 @@ public class ReadCommandTest {
 
 	private MessageRepository repository;
 	private ReadCommand command;
-	private DeltaTimeTranslator deltaTimeTranslator;
 
 	@Before
 	public void setUp() {
 		repository = new InMemoryMessageRepository();
-		deltaTimeTranslator = new EnglishDeltaTimeTranslator();
-		command = new ReadCommand(repository, deltaTimeTranslator);
+		command = new ReadCommand(repository);
 	}
 
 	@Test

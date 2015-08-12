@@ -14,9 +14,7 @@ public class SocialNetworkingClientTest {
 	public void setUp() {
 		MessageRepository messageRepository = new InMemoryMessageRepository();
 		LinkRepository linkRepository = new InMemoryLinkRepository();
-		DeltaTimeTranslator deltaTimeTranslator = new EnglishDeltaTimeTranslator();
-		CommandDispatcher commandDispatcher = new CommandDispatcher(messageRepository, linkRepository,
-				deltaTimeTranslator);
+		CommandDispatcher commandDispatcher = new CommandDispatcher(messageRepository, linkRepository);
 		client = new SocialNetworkingClient(commandDispatcher);
 	}
 

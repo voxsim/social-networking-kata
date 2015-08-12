@@ -3,34 +3,29 @@ package it.voxsim.command;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import it.voxsim.DeltaTimeTranslator;
 import it.voxsim.LinkRepository;
-import it.voxsim.Message;
 import it.voxsim.MessageRepository;
+import it.voxsim.message.Message;
 
 public class WallCommand implements Command {
 
 	private MessageRepository messageRepository;
 	private LinkRepository linkRepository;
-	private DeltaTimeTranslator deltaTimeTranslator;
 
-	public WallCommand(MessageRepository repository, LinkRepository linkRepository,
-			DeltaTimeTranslator deltaTimeTranslator) {
+	public WallCommand(MessageRepository repository, LinkRepository linkRepository) {
 		this.messageRepository = repository;
 		this.linkRepository = linkRepository;
-		this.deltaTimeTranslator = deltaTimeTranslator;
 	}
 
 	@Override
 	public String execute(String username, String argument, Calendar timeOfExecution) {
 		Set<String> links = retrieveLinks(username);
 		List<Message> messages = retrieveMessagesFromLinks(links);
-		Collections.sort(messages, new MessageComparator());
+		Collections.sort(messages);
 
 		if (messages.isEmpty())
 			return "no messages in " + username + " wall";
@@ -38,8 +33,7 @@ public class WallCommand implements Command {
 		String output = "";
 		String separator = "";
 		for (Message message : messages) {
-			String deltaTime = deltaTimeTranslator.translate(timeOfExecution, message.getTime());
-			output += separator + message.getUser() + " - " + message.getDescription() + " (" + deltaTime + ")";
+			output += separator + message.description("%{user} - %{description} (%{time})", timeOfExecution);
 			separator = "\n";
 		}
 		return output;
@@ -60,13 +54,5 @@ public class WallCommand implements Command {
 			messages.addAll(messagesOfUser);
 		}
 		return messages;
-	}
-}
-
-class MessageComparator implements Comparator<Message> {
-
-	@Override
-	public int compare(Message message1, Message message2) {
-		return (int) (message2.getTime().getTimeInMillis() - message1.getTime().getTimeInMillis());
 	}
 }
