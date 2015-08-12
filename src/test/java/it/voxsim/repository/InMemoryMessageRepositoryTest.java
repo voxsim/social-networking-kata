@@ -49,7 +49,7 @@ public class InMemoryMessageRepositoryTest {
 	}
 
 	@Test
-	public void saveIfNotExistsShouldNotOverridePreesistentUser() throws Exception {
+	public void saveIfNotExistsShouldNotOverridePreesistentMessages() throws Exception {
 		repository.saveIfNotExist(A_USER);
 		repository.addMessageTo(A_USER, A_MESSAGE, A_TIME);
 
