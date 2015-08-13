@@ -39,7 +39,7 @@ public class WallCommandTest {
 	public void setUp() {
 		messageRepository = new InMemoryMessageRepository();
 		linkRepository = new InMemoryLinkRepository();
-		command = new WallCommand(messageRepository, linkRepository);
+		command = WallCommand.create(messageRepository, linkRepository);
 	}
 
 	@Test

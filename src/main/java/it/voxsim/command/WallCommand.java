@@ -15,10 +15,12 @@ public class WallCommand implements Command {
 
 	private MessageRepository messageRepository;
 	private LinkRepository linkRepository;
+	private MultiMessagePrinter printer;
 
-	public WallCommand(MessageRepository repository, LinkRepository linkRepository) {
+	private WallCommand(MessageRepository repository, LinkRepository linkRepository, MultiMessagePrinter printer) {
 		this.messageRepository = repository;
 		this.linkRepository = linkRepository;
+		this.printer = printer;
 	}
 
 	@Override
@@ -26,17 +28,7 @@ public class WallCommand implements Command {
 		Set<String> links = retrieveLinks(username);
 		List<Message> messages = retrieveMessagesFromLinks(links);
 		Collections.sort(messages);
-
-		if (messages.isEmpty())
-			return "no messages in " + username + " wall";
-
-		String output = "";
-		String separator = "";
-		for (Message message : messages) {
-			output += separator + message.description("%{user} - %{description} (%{time})", timeOfExecution);
-			separator = "\n";
-		}
-		return output;
+		return printer.print(username, messages, timeOfExecution);
 	}
 
 	private Set<String> retrieveLinks(String username) {
@@ -54,5 +46,11 @@ public class WallCommand implements Command {
 			messages.addAll(messagesOfUser);
 		}
 		return messages;
+	}
+
+	public static WallCommand create(MessageRepository messageRepository, LinkRepository linkRepository) {
+		MultiMessagePrinter printer = new MultiMessagePrinter("no messages in %{username} wall",
+				"%{user} - %{description} (%{time})");
+		return new WallCommand(messageRepository, linkRepository, printer);
 	}
 }

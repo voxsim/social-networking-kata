@@ -19,7 +19,7 @@ public class CommandDispatcher {
 		commandDispatcher.put(null, ReadCommand.create(messageRepository));
 		commandDispatcher.put("->", new PostCommand(messageRepository, linkRepository));
 		commandDispatcher.put("follows", new FollowCommand(linkRepository));
-		commandDispatcher.put("wall", new WallCommand(messageRepository, linkRepository));
+		commandDispatcher.put("wall", WallCommand.create(messageRepository, linkRepository));
 	}
 
 	public Command dispatch(String action) {
