@@ -28,13 +28,13 @@ public class ReadCommandTest {
 	private static final Calendar A_TIME_OF_MESSAGE_2 = new EnhacedCalendar(A_TIME_OF_EXECUTION, ONE_MINUTE);
 	private static final Calendar A_TIME_OF_MESSAGE_3 = new EnhacedCalendar(A_TIME_OF_EXECUTION, 2 * ONE_HOUR);
 
-	private MessageRepository repository;
+	private MessageRepository messageRepository;
 	private ReadCommand command;
 
 	@Before
 	public void setUp() {
-		repository = new InMemoryMessageRepository();
-		command = new ReadCommand(repository);
+		messageRepository = new InMemoryMessageRepository();
+		command = ReadCommand.create(messageRepository);
 	}
 
 	@Test
@@ -46,8 +46,8 @@ public class ReadCommandTest {
 
 	@Test
 	public void oneMessageFromUser() {
-		repository.saveIfNotExist(A_USER);
-		repository.addMessageTo(A_USER, A_MESSAGE, A_TIME_OF_MESSAGE);
+		messageRepository.saveIfNotExist(A_USER);
+		messageRepository.addMessageTo(A_USER, A_MESSAGE, A_TIME_OF_MESSAGE);
 
 		String output = command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
 
@@ -56,10 +56,10 @@ public class ReadCommandTest {
 
 	@Test
 	public void multipleMessagesFromUser() {
-		repository.saveIfNotExist(A_USER);
-		repository.addMessageTo(A_USER, A_MESSAGE, A_TIME_OF_MESSAGE);
-		repository.addMessageTo(A_USER, A_MESSAGE_2, A_TIME_OF_MESSAGE_2);
-		repository.addMessageTo(A_USER, A_MESSAGE_3, A_TIME_OF_MESSAGE_3);
+		messageRepository.saveIfNotExist(A_USER);
+		messageRepository.addMessageTo(A_USER, A_MESSAGE, A_TIME_OF_MESSAGE);
+		messageRepository.addMessageTo(A_USER, A_MESSAGE_2, A_TIME_OF_MESSAGE_2);
+		messageRepository.addMessageTo(A_USER, A_MESSAGE_3, A_TIME_OF_MESSAGE_3);
 
 		String output = command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
 

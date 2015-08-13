@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.voxsim.command.Command;
+import it.voxsim.command.CommandDispatcher;
 
 public class SocialNetworkingClient {
 

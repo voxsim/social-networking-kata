@@ -9,24 +9,22 @@ import it.voxsim.repository.MessageRepository;
 public class ReadCommand implements Command {
 
 	private MessageRepository messageRepository;
+	private MultiMessagePrinter printer;
 
-	public ReadCommand(MessageRepository messageRepository) {
+	private ReadCommand(MessageRepository messageRepository, MultiMessagePrinter printer) {
 		this.messageRepository = messageRepository;
+		this.printer = printer;
 	}
 
 	@Override
 	public String execute(String username, String argument, Calendar timeOfExecution) {
 		List<Message> messages = messageRepository.retrieveMessagesByUsername(username);
+		return printer.print(username, messages, timeOfExecution);
+	}
 
-		if (messages.isEmpty())
-			return "no messages from " + username;
-
-		String output = "";
-		String separator = "";
-		for (Message message : messages) {
-			output += separator + message.description("%{description} (%{time})", timeOfExecution);
-			separator = "\n";
-		}
-		return output;
+	public static ReadCommand create(MessageRepository messageRepository) {
+		MultiMessagePrinter printer = new MultiMessagePrinter("no messages from %{username}",
+				"%{description} (%{time})");
+		return new ReadCommand(messageRepository, printer);
 	}
 }

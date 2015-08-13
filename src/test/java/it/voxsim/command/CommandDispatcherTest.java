@@ -1,4 +1,4 @@
-package it.voxsim;
+package it.voxsim.command;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import it.voxsim.command.Command;
+import it.voxsim.command.CommandDispatcher;
 import it.voxsim.command.FollowCommand;
 import it.voxsim.command.PostCommand;
 import it.voxsim.command.ReadCommand;

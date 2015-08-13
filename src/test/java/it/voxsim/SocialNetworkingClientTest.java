@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.voxsim.command.CommandDispatcher;
 import it.voxsim.message.EnhacedCalendar;
 import it.voxsim.repository.InMemoryLinkRepository;
 import it.voxsim.repository.InMemoryMessageRepository;

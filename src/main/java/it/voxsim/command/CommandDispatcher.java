@@ -1,4 +1,4 @@
-package it.voxsim;
+package it.voxsim.command;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ public class CommandDispatcher {
 
 	public CommandDispatcher(MessageRepository messageRepository, LinkRepository linkRepository) {
 		commandDispatcher = new HashMap<String, Command>();
-		commandDispatcher.put(null, new ReadCommand(messageRepository));
+		commandDispatcher.put(null, ReadCommand.create(messageRepository));
 		commandDispatcher.put("->", new PostCommand(messageRepository, linkRepository));
 		commandDispatcher.put("follows", new FollowCommand(linkRepository));
 		commandDispatcher.put("wall", new WallCommand(messageRepository, linkRepository));
