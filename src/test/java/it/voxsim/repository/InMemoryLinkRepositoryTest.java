@@ -26,7 +26,7 @@ public class InMemoryLinkRepositoryTest {
 	public void saveIfNotExistAndListOfLinksShouldBeEmpty() throws Exception {
 		repository.saveIfNotExist(A_USER);
 
-		Set<String> links = repository.retrieveByUsername(A_USER);
+		Set<String> links = repository.retrieveLinksByUsername(A_USER);
 
 		assertEmpty(links);
 	}
@@ -35,9 +35,9 @@ public class InMemoryLinkRepositoryTest {
 	public void addLinkToUser() throws Exception {
 		repository.saveIfNotExist(A_USER);
 
-		repository.addTo(A_USER, A_FOLLOWED_USER);
+		repository.addLinkBetween(A_USER, A_FOLLOWED_USER);
 
-		Set<String> links = repository.retrieveByUsername(A_USER);
+		Set<String> links = repository.retrieveLinksByUsername(A_USER);
 		assertNotNull(links);
 		assertFalse(links.isEmpty());
 		assertTrue(links.contains(A_FOLLOWED_USER));
@@ -46,10 +46,10 @@ public class InMemoryLinkRepositoryTest {
 	@Test
 	public void saveIfNotExistsShouldNotOverridePreesistentLinks() throws Exception {
 		repository.saveIfNotExist(A_USER);
-		repository.addTo(A_USER, A_FOLLOWED_USER);
+		repository.addLinkBetween(A_USER, A_FOLLOWED_USER);
 
 		repository.saveIfNotExist(A_USER);
-		Set<String> links = repository.retrieveByUsername(A_USER);
+		Set<String> links = repository.retrieveLinksByUsername(A_USER);
 
 		assertNotNull(links);
 		assertFalse(links.isEmpty());

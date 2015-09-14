@@ -32,7 +32,7 @@ public class WallCommand implements Command {
 	}
 
 	private Set<String> retrieveLinks(String username) {
-		Set<String> links = linkRepository.retrieveByUsername(username);
+		Set<String> links = linkRepository.retrieveLinksByUsername(username);
 		links.add(username);
 		return links;
 	}

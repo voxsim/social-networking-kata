@@ -45,7 +45,7 @@ public class PostCommandTest {
 	public void firstPostForOneUserShouldSaveThatUserInLinkRepository() {
 		command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
 
-		assertEmpty(linkRepository.retrieveByUsername(A_USER));
+		assertEmpty(linkRepository.retrieveLinksByUsername(A_USER));
 	}
 
 	@Test

@@ -85,7 +85,7 @@ public class WallCommandTest {
 		linkRepository.saveIfNotExist(A_USER);
 		linkRepository.saveIfNotExist(A_FOLLOWED_USER);
 
-		linkRepository.addTo(A_USER, A_FOLLOWED_USER);
+		linkRepository.addLinkBetween(A_USER, A_FOLLOWED_USER);
 
 		String output = command.execute(A_USER, null, A_TIME_OF_EXECUTION);
 

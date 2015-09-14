@@ -17,18 +17,18 @@ public class FollowCommandTest {
 	private static final String USER_B = "Charlie";
 
 	@Test
-	public void userAfollowsUserBAndBothAlreadyExists() {
+	public void userAfollowsUserB() {
 		LinkRepository repository = new InMemoryLinkRepository();
 		repository.saveIfNotExist(USER_A);
 		repository.saveIfNotExist(USER_B);
 
-		assertTrue(repository.retrieveByUsername(USER_A).isEmpty());
+		assertTrue(repository.retrieveLinksByUsername(USER_A).isEmpty());
 
 		FollowCommand command = new FollowCommand(repository);
 
 		command.execute(USER_A, USER_B, new GregorianCalendar());
 
-		assertTrue(repository.retrieveByUsername(USER_A).contains(USER_B));
+		assertTrue(repository.retrieveLinksByUsername(USER_A).contains(USER_B));
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class FollowCommandTest {
 		command.execute(USER_A, USER_B, new GregorianCalendar());
 		command.execute(USER_A, USER_B, new GregorianCalendar());
 
-		Set<String> followedByUserA = repository.retrieveByUsername(USER_A);
+		Set<String> followedByUserA = repository.retrieveLinksByUsername(USER_A);
 		assertTrue(followedByUserA.contains(USER_B));
 		assertEquals(1, followedByUserA.size());
 	}

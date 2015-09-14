@@ -4,9 +4,9 @@ import java.util.Set;
 
 public interface LinkRepository {
 
-	Set<String> retrieveByUsername(String username);
+	Set<String> retrieveLinksByUsername(String username);
 
-	void addTo(String username, String argument);
+	void addLinkBetween(String username, String followedUsername);
 
 	void saveIfNotExist(String username);
 

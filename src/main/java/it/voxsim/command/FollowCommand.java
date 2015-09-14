@@ -13,8 +13,8 @@ public class FollowCommand implements Command {
 	}
 
 	@Override
-	public String execute(String username, String argument, Calendar timeOfExecution) {
-		repository.addTo(username, argument);
+	public String execute(String username, String followedUsername, Calendar timeOfExecution) {
+		repository.addLinkBetween(username, followedUsername);
 		return "";
 	}
 }
