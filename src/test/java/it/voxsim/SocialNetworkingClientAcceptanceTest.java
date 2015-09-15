@@ -17,7 +17,7 @@ import it.voxsim.repository.InMemoryMessageRepository;
 import it.voxsim.repository.LinkRepository;
 import it.voxsim.repository.MessageRepository;
 
-public class SocialNetworkingClientTest {
+public class SocialNetworkingClientAcceptanceTest {
 	private SocialNetworkingClient client;
 
 	@Before

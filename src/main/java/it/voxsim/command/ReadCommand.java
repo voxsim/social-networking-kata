@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import it.voxsim.message.Message;
+import it.voxsim.message.MultiMessagePrinter;
 import it.voxsim.repository.MessageRepository;
 
 public class ReadCommand implements Command {
@@ -11,7 +12,7 @@ public class ReadCommand implements Command {
 	private MessageRepository messageRepository;
 	private MultiMessagePrinter printer;
 
-	private ReadCommand(MessageRepository messageRepository, MultiMessagePrinter printer) {
+	public ReadCommand(MessageRepository messageRepository, MultiMessagePrinter printer) {
 		this.messageRepository = messageRepository;
 		this.printer = printer;
 	}

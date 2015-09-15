@@ -1,69 +1,47 @@
 package it.voxsim.command;
 
-import static it.voxsim.AssertUtils.ONE_HOUR;
-import static it.voxsim.AssertUtils.ONE_MINUTE;
-import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import it.voxsim.message.EnhacedCalendar;
-import it.voxsim.repository.InMemoryMessageRepository;
+import it.voxsim.message.Message;
+import it.voxsim.message.MultiMessagePrinter;
 import it.voxsim.repository.MessageRepository;
 
 public class ReadCommandTest {
 
 	private static final String A_USER = "user";
-	private static final String A_MESSAGE = "message";
-	private static final String A_MESSAGE_2 = "message 2";
-	private static final String A_MESSAGE_3 = "message 3";
-	private static final String A_DELTA_TIME = "(0 second ago)";
-	private static final String A_DELTA_TIME_2 = "(1 minute ago)";
-	private static final String A_DELTA_TIME_3 = "(2 hours ago)";
 	private static final Calendar A_TIME_OF_EXECUTION = new GregorianCalendar();
-	private static final Calendar A_TIME_OF_MESSAGE = A_TIME_OF_EXECUTION;
-	private static final Calendar A_TIME_OF_MESSAGE_2 = new EnhacedCalendar(A_TIME_OF_EXECUTION, ONE_MINUTE);
-	private static final Calendar A_TIME_OF_MESSAGE_3 = new EnhacedCalendar(A_TIME_OF_EXECUTION, 2 * ONE_HOUR);
+	private static final ArrayList<Message> AN_EMPTY_LIST = new ArrayList<Message>();
 
 	private MessageRepository messageRepository;
 	private ReadCommand command;
+	private MultiMessagePrinter printer;
 
 	@Before
 	public void setUp() {
-		messageRepository = new InMemoryMessageRepository();
-		command = ReadCommand.create(messageRepository);
+		messageRepository = mock(MessageRepository.class);
+		printer = mock(MultiMessagePrinter.class);
+		command = new ReadCommand(messageRepository, printer);
 	}
 
 	@Test
-	public void noMessagesFromUser() {
-		String output = command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
+	public void retrieveMessagesOfUsername() {
+		command.execute(A_USER, null, A_TIME_OF_EXECUTION);
 
-		assertEquals("no messages from " + A_USER, output);
+		verify(messageRepository).retrieveMessagesByUsername(A_USER);
 	}
 
 	@Test
-	public void oneMessageFromUser() {
-		messageRepository.saveIfNotExist(A_USER);
-		messageRepository.addMessageTo(A_USER, A_MESSAGE, A_TIME_OF_MESSAGE);
+	public void printMessagesOfUsername() {
+		command.execute(A_USER, null, A_TIME_OF_EXECUTION);
 
-		String output = command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
-
-		assertEquals(A_MESSAGE + " " + A_DELTA_TIME, output);
-	}
-
-	@Test
-	public void multipleMessagesFromUser() {
-		messageRepository.saveIfNotExist(A_USER);
-		messageRepository.addMessageTo(A_USER, A_MESSAGE, A_TIME_OF_MESSAGE);
-		messageRepository.addMessageTo(A_USER, A_MESSAGE_2, A_TIME_OF_MESSAGE_2);
-		messageRepository.addMessageTo(A_USER, A_MESSAGE_3, A_TIME_OF_MESSAGE_3);
-
-		String output = command.execute(A_USER, A_MESSAGE, A_TIME_OF_EXECUTION);
-
-		assertEquals(A_MESSAGE + " " + A_DELTA_TIME + "\n" + A_MESSAGE_2 + " " + A_DELTA_TIME_2 + "\n" + A_MESSAGE_3
-				+ " " + A_DELTA_TIME_3, output);
+		verify(printer).print(A_USER, AN_EMPTY_LIST, A_TIME_OF_EXECUTION);
 	}
 }

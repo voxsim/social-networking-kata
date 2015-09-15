@@ -1,6 +1,6 @@
 package it.voxsim.command;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import it.voxsim.message.Message;
+import it.voxsim.message.MultiMessagePrinter;
 
 public class MultiMessagePrinterTest {
 	

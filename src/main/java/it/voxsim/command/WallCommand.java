@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import it.voxsim.message.Message;
+import it.voxsim.message.MultiMessagePrinter;
 import it.voxsim.repository.LinkRepository;
 import it.voxsim.repository.MessageRepository;
 
