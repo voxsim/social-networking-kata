@@ -30,7 +30,7 @@ public class InMemoryMessageRepositoryTest {
 	public void saveIfNotExistAndListOfMessagesShouldBeEmpty() throws Exception {
 		repository.saveIfNotExist(A_USER);
 
-		List<Message> messages = repository.retrieveMessagesByUsername(A_USER);
+		List<Message> messages = repository.retrieveMessagesByUsernameOrderedByTime(A_USER);
 
 		assertEmpty(messages);
 	}
@@ -41,11 +41,11 @@ public class InMemoryMessageRepositoryTest {
 
 		repository.addMessageTo(A_USER, A_MESSAGE, A_TIME);
 
-		List<Message> messages = repository.retrieveMessagesByUsername(A_USER);
+		List<Message> messages = repository.retrieveMessagesByUsernameOrderedByTime(A_USER);
 		assertNotNull(messages);
 		assertFalse(messages.isEmpty());
 		Message message = messages.get(0);
-		assertNotNull(A_MESSAGE, message);
+		assertNotNull("message should not be null", message);
 	}
 
 	@Test
@@ -54,11 +54,11 @@ public class InMemoryMessageRepositoryTest {
 		repository.addMessageTo(A_USER, A_MESSAGE, A_TIME);
 
 		repository.saveIfNotExist(A_USER);
-		List<Message> messages = repository.retrieveMessagesByUsername(A_USER);
+		List<Message> messages = repository.retrieveMessagesByUsernameOrderedByTime(A_USER);
 
 		assertNotNull(messages);
 		assertFalse(messages.isEmpty());
 		Message message = messages.get(0);
-		assertNotNull(A_MESSAGE, message);
+		assertNotNull("message should not be null", message);
 	}
 }

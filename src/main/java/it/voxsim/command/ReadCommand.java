@@ -19,7 +19,7 @@ public class ReadCommand implements Command {
 
 	@Override
 	public String execute(String username, String argument, Calendar timeOfExecution) {
-		List<Message> messages = messageRepository.retrieveMessagesByUsername(username);
+		List<Message> messages = messageRepository.retrieveMessagesByUsernameOrderedByTime(username);
 		return printer.print(username, messages, timeOfExecution);
 	}
 

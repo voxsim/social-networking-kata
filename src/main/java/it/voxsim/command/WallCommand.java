@@ -43,7 +43,7 @@ public class WallCommand implements Command {
 		Iterator<String> iterator = links.iterator();
 		while (iterator.hasNext()) {
 			String user = iterator.next();
-			List<Message> messagesOfUser = messageRepository.retrieveMessagesByUsername(user);
+			List<Message> messagesOfUser = messageRepository.retrieveMessagesByUsernameOrderedByTime(user);
 			messages.addAll(messagesOfUser);
 		}
 		return messages;

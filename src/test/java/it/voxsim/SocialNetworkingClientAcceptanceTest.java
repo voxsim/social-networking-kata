@@ -2,14 +2,12 @@ package it.voxsim;
 
 import static it.voxsim.AssertUtils.ONE_MINUTE;
 import static it.voxsim.AssertUtils.ONE_SECOND;
-import static org.junit.Assert.*;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import it.voxsim.command.CommandDispatcher;
@@ -51,7 +49,6 @@ public class SocialNetworkingClientAcceptanceTest {
 	}
 
 	@Test
-	@Ignore("TODO: Fixing this case of reading")
 	public void readMessagesFromBobAfterHePostedTwoMessages() throws Exception {
 		GregorianCalendar timeRead = new EnhacedCalendar();
 		GregorianCalendar timePosting = new EnhacedCalendar(timeRead, 2 * ONE_MINUTE);
@@ -60,7 +57,7 @@ public class SocialNetworkingClientAcceptanceTest {
 		typeCommandAndAssertThatOutputIs("Bob -> Damn! We lost!", "", timePosting);
 		typeCommandAndAssertThatOutputIs("Bob -> Good game though.", "", timeSecondPosting);
 
-		typeCommandAndAssertThatOutputIs("Bob", "Good game though. (1 minutes ago)\nDamn! We lost! (2 minutes ago)",
+		typeCommandAndAssertThatOutputIs("Bob", "Good game though. (1 minute ago)\nDamn! We lost! (2 minutes ago)",
 				timeRead);
 	}
 

@@ -7,7 +7,7 @@ import it.voxsim.message.Message;
 
 public interface MessageRepository {
 
-	List<Message> retrieveMessagesByUsername(String username);
+	List<Message> retrieveMessagesByUsernameOrderedByTime(String username);
 
 	void saveIfNotExist(String username);
 

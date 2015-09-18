@@ -35,7 +35,7 @@ public class ReadCommandTest {
 	public void retrieveMessagesOfUsername() {
 		command.execute(A_USER, null, A_TIME_OF_EXECUTION);
 
-		verify(messageRepository).retrieveMessagesByUsername(A_USER);
+		verify(messageRepository).retrieveMessagesByUsernameOrderedByTime(A_USER);
 	}
 
 	@Test
