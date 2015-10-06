@@ -14,14 +14,17 @@ public class TimeDescription {
 	public String description() {
 		String timeDescription = number + " " + timeType.name().toLowerCase();
 		
-		if(number > 1)
+		if(isPlural())
 			timeDescription += "s";
 		
 		return timeDescription;
 	}
 
+	private boolean isPlural() {
+		return number > 1;
+	}
+
 	public boolean isNotZero() {
 		return number > 0;
 	}
-
 }
