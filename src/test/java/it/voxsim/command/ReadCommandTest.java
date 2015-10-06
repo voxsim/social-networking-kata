@@ -32,14 +32,14 @@ public class ReadCommandTest {
 	}
 
 	@Test
-	public void retrieveMessagesOfUsername() {
+	public void retrieveMessagesOfUser() {
 		command.execute(A_USER, null, A_TIME_OF_EXECUTION);
 
 		verify(messageRepository).retrieveMessagesByUsernameOrderedByTime(A_USER);
 	}
 
 	@Test
-	public void printMessagesOfUsername() {
+	public void printMessagesOfUser() {
 		command.execute(A_USER, null, A_TIME_OF_EXECUTION);
 
 		verify(printer).print(A_USER, AN_EMPTY_LIST, A_TIME_OF_EXECUTION);

@@ -18,7 +18,7 @@ public class WallCommand implements Command {
 	private LinkRepository linkRepository;
 	private MultiMessagePrinter printer;
 
-	private WallCommand(MessageRepository repository, LinkRepository linkRepository, MultiMessagePrinter printer) {
+	public WallCommand(MessageRepository repository, LinkRepository linkRepository, MultiMessagePrinter printer) {
 		this.messageRepository = repository;
 		this.linkRepository = linkRepository;
 		this.printer = printer;
