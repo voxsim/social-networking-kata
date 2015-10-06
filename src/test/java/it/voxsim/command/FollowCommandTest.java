@@ -1,6 +1,7 @@
 package it.voxsim.command;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import java.util.GregorianCalendar;
@@ -25,5 +26,16 @@ public class FollowCommandTest {
 		command.execute(USER, ANOTHER_USER, new GregorianCalendar());
 
 		verify(repository).addLinkBetween(USER, ANOTHER_USER);
+	}
+
+	@Test
+	public void userCanNotFollowHimself() {
+		LinkRepository repository = mock(LinkRepository.class);
+
+		FollowCommand command = new FollowCommand(repository);
+
+		command.execute(USER, USER, new GregorianCalendar());
+
+		verify(repository, never()).addLinkBetween(USER, USER);
 	}
 }

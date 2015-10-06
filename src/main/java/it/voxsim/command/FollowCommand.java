@@ -14,7 +14,12 @@ public class FollowCommand implements Command {
 
 	@Override
 	public String execute(String username, String followedUsername, Calendar timeOfExecution) {
-		repository.addLinkBetween(username, followedUsername);
+		if(areDifferentUsers(username, followedUsername))
+			repository.addLinkBetween(username, followedUsername);
 		return "";
+	}
+
+	private boolean areDifferentUsers(String username, String followedUsername) {
+		return !username.equals(followedUsername);
 	}
 }
