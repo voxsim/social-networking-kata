@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +22,8 @@ public class WallCommandTest {
 	private static final String A_USER = "user";
 	private static final Calendar A_TIME_OF_EXECUTION = new GregorianCalendar();
 	private static final ArrayList<Message> AN_EMPTY_LIST = new ArrayList<Message>();
-	private static final HashSet<String> A_LIST_WITH_ANOTHER_USER = new HashSet<String>() {
+	private static final ArrayList<String> A_LIST_WITH_ANOTHER_USER = new ArrayList<String>() {
+		private static final long serialVersionUID = 1L;
 		{
 			add(ANOTHER_USER);
 		}

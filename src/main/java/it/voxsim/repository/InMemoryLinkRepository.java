@@ -1,7 +1,9 @@
 package it.voxsim.repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,11 +11,14 @@ public class InMemoryLinkRepository implements LinkRepository {
 
 	private Map<String, Set<String>> linksByUsername = new HashMap<String, Set<String>>();
 
-	public Set<String> retrieveLinksByUsername(String username) {
+	public List<String> retrieveLinksByUsername(String username) {
 		Set<String> links = linksByUsername.get(username);
-		if(links == null)
-			return new HashSet<String>();
-		return links;
+		ArrayList<String> result = new ArrayList<String>();
+
+		if (links != null)
+			result.addAll(links);
+
+		return result;
 	}
 
 	public void saveIfNotExist(String username) {

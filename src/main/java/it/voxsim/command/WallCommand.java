@@ -3,9 +3,7 @@ package it.voxsim.command;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import it.voxsim.message.Message;
 import it.voxsim.message.MultiMessagePrinter;
@@ -26,23 +24,21 @@ public class WallCommand implements Command {
 
 	@Override
 	public String execute(String username, String argument, Calendar timeOfExecution) {
-		Set<String> links = retrieveLinks(username);
+		List<String> links = retrieveLinks(username);
 		List<Message> messages = retrieveMessagesFromLinks(links);
 		Collections.sort(messages);
 		return printer.print(username, messages, timeOfExecution);
 	}
 
-	private Set<String> retrieveLinks(String username) {
-		Set<String> links = linkRepository.retrieveLinksByUsername(username);
+	private List<String> retrieveLinks(String username) {
+		List<String> links = linkRepository.retrieveLinksByUsername(username);
 		links.add(username);
 		return links;
 	}
 
-	private List<Message> retrieveMessagesFromLinks(Set<String> links) {
+	private List<Message> retrieveMessagesFromLinks(List<String> links) {
 		List<Message> messages = new ArrayList<Message>();
-		Iterator<String> iterator = links.iterator();
-		while (iterator.hasNext()) {
-			String user = iterator.next();
+		for (String user : links) {
 			List<Message> messagesOfUser = messageRepository.retrieveMessagesByUsernameOrderedByTime(user);
 			messages.addAll(messagesOfUser);
 		}
