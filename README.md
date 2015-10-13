@@ -80,6 +80,10 @@ Run
 ```
 mvn exec:java -Dexec.mainClass=it.voxsim.App
 ```
+Exit from running
+```
+CTRL + D
+```
 Test
 ```
 mvn test
