@@ -17,7 +17,6 @@ public class ReadCommand implements Command {
 		this.printer = printer;
 	}
 
-	@Override
 	public String execute(String username, String argument, Calendar timeOfExecution) {
 		List<Message> messages = messageRepository.retrieveMessagesByUsernameOrderedByTime(username);
 		return printer.print(username, messages, timeOfExecution);

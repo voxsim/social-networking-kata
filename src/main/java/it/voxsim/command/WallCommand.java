@@ -22,7 +22,6 @@ public class WallCommand implements Command {
 		this.printer = printer;
 	}
 
-	@Override
 	public String execute(String username, String argument, Calendar timeOfExecution) {
 		List<String> links = retrieveLinks(username);
 		List<Message> messages = retrieveMessagesFromLinks(links);

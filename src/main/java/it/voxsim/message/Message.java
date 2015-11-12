@@ -25,7 +25,6 @@ public class Message implements Comparable<Message> {
 		return deltaTimeTranslator.translate(timeOfExecution, time);
 	}
 
-	@Override
 	public int compareTo(Message anotherMessage) {
 		return (int) (anotherMessage.time.getTimeInMillis() - time.getTimeInMillis());
 	}

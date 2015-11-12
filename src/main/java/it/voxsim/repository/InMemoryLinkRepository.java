@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import it.voxsim.exception.UserNotExistsException;
+
 public class InMemoryLinkRepository implements LinkRepository {
 
 	private Map<String, Set<String>> linksByUsername = new HashMap<String, Set<String>>();
@@ -28,6 +30,10 @@ public class InMemoryLinkRepository implements LinkRepository {
 
 	public void addLinkBetween(String username, String argument) {
 		Set<String> links = linksByUsername.get(username);
+
+        if(links == null)
+            throw new UserNotExistsException();
+
 		links.add(argument);
 	}
 }

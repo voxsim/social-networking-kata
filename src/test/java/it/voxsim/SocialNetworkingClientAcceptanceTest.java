@@ -67,6 +67,11 @@ public class SocialNetworkingClientAcceptanceTest {
 	}
 
 	@Test
+	public void aNotExistingUserFollowsANotExistingUser() throws Exception {
+		typeCommandAndAssertThatOutputIs("Alice follows Bob", "Something went wrong, please be sure that Alice or Bob exists.");
+	}
+
+	@Test
 	public void showWallAfterComplexScenario() throws Exception {
 		GregorianCalendar timeRead = new EnhacedCalendar();
 		GregorianCalendar timePosting = new EnhacedCalendar(timeRead, 5 * ONE_MINUTE);

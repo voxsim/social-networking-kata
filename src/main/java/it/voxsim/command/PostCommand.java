@@ -15,7 +15,6 @@ public class PostCommand implements Command {
 		this.linkRepository = linkRepository;
 	}
 
-	@Override
 	public String execute(String username, String argument, Calendar timeOfExecution) {
 		messageRepository.saveIfNotExist(username);
 		linkRepository.saveIfNotExist(username);
