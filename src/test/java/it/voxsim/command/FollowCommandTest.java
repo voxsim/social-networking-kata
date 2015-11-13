@@ -18,7 +18,7 @@ public class FollowCommandTest {
 	private static final String ANOTHER_USER = "Charlie";
 
 	@Test
-	public void userfollowsAnotherUser() {
+	public void userFollowsAnotherUser() {
 		LinkRepository repository = mock(LinkRepository.class);
 
 		FollowCommand command = new FollowCommand(repository);

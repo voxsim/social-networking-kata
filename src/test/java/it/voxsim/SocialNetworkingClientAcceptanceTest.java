@@ -89,6 +89,36 @@ public class SocialNetworkingClientAcceptanceTest {
 		typeCommandAndAssertThatOutputIs("Alice wall", "Charlie - I'm in New York today! (15 seconds ago)\n"
 				+ "Alice - I love the weather today (5 minutes ago)", timeWall);
 	}
+	
+	@Test
+	public void CharlieCanSubscribeToAlicesAndBobsTimelinesAndViewAnAggregatedListOfAllSubscriptions() throws Exception {
+		GregorianCalendar time1 = new EnhacedCalendar();
+		GregorianCalendar time2 = new EnhacedCalendar(time1, 5 * ONE_MINUTE);
+		GregorianCalendar time3 = new EnhacedCalendar(time1, 2 * ONE_MINUTE);
+		GregorianCalendar time4 = new EnhacedCalendar(time1, 1 * ONE_MINUTE);
+		GregorianCalendar time5 = new EnhacedCalendar(time1, 2 * ONE_SECOND);
+		
+		typeCommandAndAssertThatOutputIs("Alice -> I love the weather today", "", time2);
+		
+		typeCommandAndAssertThatOutputIs("Bob -> Damn! We lost!", "", time3);
+		
+		typeCommandAndAssertThatOutputIs("Bob -> Good game though.", "", time4);
+		
+		typeCommandAndAssertThatOutputIs("Charlie -> I'm in New York today!", "", time5);
+		
+		typeCommandAndAssertThatOutputIs("Charlie follows Alice", "");
+
+		typeCommandAndAssertThatOutputIs("Charlie wall", "Charlie - I'm in New York today! (2 seconds ago)\nAlice - I love the weather today (5 minutes ago)", time1);
+		
+		typeCommandAndAssertThatOutputIs("Charlie follows Bob", "");
+
+		typeCommandAndAssertThatOutputIs("Charlie wall",
+				"Charlie - I'm in New York today! (2 seconds ago)\n"
+				+ "Bob - Good game though. (1 minute ago)\n"
+				+ "Bob - Damn! We lost! (2 minutes ago)\n"
+				+ "Alice - I love the weather today (5 minutes ago)",
+				time1);
+	}
 
 	private void typeCommandAndAssertThatOutputIs(String command, String expectedOutput) {
 		typeCommandAndAssertThatOutputIs(command, expectedOutput, new GregorianCalendar());
